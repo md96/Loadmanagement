@@ -1,6 +1,6 @@
 package models
 
-type Station struct {
+type Gridstations struct {
 	ID       int `gorm:"primaryKey"`
 	Status   string
 	Name     string

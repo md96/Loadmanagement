@@ -18,6 +18,6 @@ func DBInit() {
 	if err != nil {
 		log.Fatal("Issue while connecting to DB", err)
 	}
-	DB.AutoMigrate(&models.Station{}, &models.Powerlog{})
+	DB.AutoMigrate(&models.Gridstations{}, &models.Powerlog{})
 
 }
