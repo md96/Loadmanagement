@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	//"load-management/models"
+	"github.com/md96/load-management/db"
 )
 
 func LoginAPI(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +22,7 @@ func LoginAPI(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
+	db.DBInit()
 	fmt.Println("Load management System micro service ")
 	http.HandleFunc("/login", LoginAPI)
 	fmt.Println("Load Management Service is started on 8082 Port")
