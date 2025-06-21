@@ -12,7 +12,10 @@ import (
 var DB *gorm.DB
 
 func DBInit() {
-	dsn := "root:root@tcp(localhost:3306)/recordings"
+	//dsn := "root:root@tcp(localhost:3306)/recordings"
+	dsn := "root:root@tcp(host.docker.internal:3306)/recordings"
+
+	//user:password@tcp(host.docker.internal:3306)/evdb?parseTime=true
 	var err error
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
