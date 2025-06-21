@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'windows'   // Replace with your Windows Jenkins node label
-    }
+   agent any
 
     environment {
         PATH = "${env.PATH};C:\\Program Files\\Docker\\Docker\\resources\\bin"
