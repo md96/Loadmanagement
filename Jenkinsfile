@@ -27,7 +27,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker run -p 8082:8082 load-management'
+                bat "docker run -d -p 8082:8082 --name load-management-container load-management"
             }
         }
     }
