@@ -8,6 +8,7 @@ import (
 	//"load-management/models"
 	"github.com/md96/load-management/db"
 	"github.com/md96/load-management/models"
+	"github.com/md96/load-management/restcontroller"
 )
 
 func stationcreation(w http.ResponseWriter, r *http.Request) {
@@ -55,6 +56,7 @@ func main() {
 	fmt.Println("Load management System micro service ")
 	http.HandleFunc("/stationcreation", stationcreation)
 	http.HandleFunc("/getallstations", getallstations)
+	http.HandleFunc("/deletestation", restcontroller.Deletestation)
 	fmt.Println("Load Management Service is started on 8082 Port")
 	http.ListenAndServe(":8082", nil)
 }
