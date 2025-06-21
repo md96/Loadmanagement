@@ -10,7 +10,7 @@ import (
 	"github.com/md96/load-management/models"
 )
 
-func LoginAPI(w http.ResponseWriter, r *http.Request) {
+func stationcreation(w http.ResponseWriter, r *http.Request) {
 	var station models.Gridstations
 
 	if r.Method == http.MethodPost {
@@ -29,23 +29,32 @@ func LoginAPI(w http.ResponseWriter, r *http.Request) {
 		}
 		json.NewEncoder(w).Encode(response)
 	}
+
+}
+
+func getallstations(w http.ResponseWriter, r *http.Request) {
+
+	var stations []models.Gridstations
+	if r.Method == http.MethodGet {
+		result := db.DB.Find(&stations)
+		if result.Error != nil {
+			http.Error(w, "Error while fetching data", http.StatusInternalServerError)
+			return
+		}
+
+	}
+	json.NewEncoder(w).Encode(stations)
+
 }
 
 func main() {
-	db.DBInit()
-	/*station := models.Gridstations{
-		ID:     1002,
-		Status: "Active",
-		Name:   "MAH-002",
-	}
 
-	result := db.DB.Create(&station)
-	if result.Error != nil {
-		fmt.Println("Data insertion issue")
-	}*/
+	//DB Connection Initialization
+	db.DBInit()
 
 	fmt.Println("Load management System micro service ")
-	http.HandleFunc("/login", LoginAPI)
+	http.HandleFunc("/stationcreation", stationcreation)
+	http.HandleFunc("/getallstations", getallstations)
 	fmt.Println("Load Management Service is started on 8082 Port")
 	http.ListenAndServe(":8082", nil)
 }

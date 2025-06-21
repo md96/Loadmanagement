@@ -1,10 +1,10 @@
 package models
 
 type Gridstations struct {
-	ID       int `gorm:"primaryKey"`
-	Status   string
-	Name     string
-	Powerlog []Powerlog `gorm:"foreignKey:StationId"`
+	ID       int        `json:"id" gorm:"primaryKey"`
+	Status   string     `json:"status"`
+	Name     string     `json:"name"`
+	Powerlog []Powerlog `json:"-" gorm:"foreignKey:StationId"`
 }
 
 type Powerlog struct {
