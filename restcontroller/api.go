@@ -10,6 +10,16 @@ import (
 	"github.com/md96/load-management/models"
 )
 
+// Deletestation godoc
+// @Summary Delete a station
+// @Description Delete station by ID
+// @Tags Stations
+// @Accept  json
+// @Produce  json
+// @Param id query string true "Station ID"
+// @Success 200 {object} map[string]string
+// @Failure 400 {string} string "Invalid ID"
+// @Router /deletestation [delete]
 func Deletestation(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Delete station  API is called ")
 	query := r.URL.Query()
@@ -29,12 +39,25 @@ func Deletestation(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// Stationcreation godoc
+// @Summary Create a new station
+// @Description Create a new grid station entry
+// @Tags Stations
+// @Accept  json
+// @Produce  json
+// @Param station body models.Gridstations true "Station Data"
+// @Success 200 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /stationcreation [post]
 func Stationcreation(w http.ResponseWriter, r *http.Request) {
 	var station models.Gridstations
 
 	if r.Method == http.MethodPost {
 
 		json.NewDecoder(r.Body).Decode(&station)
+
+		fmt.Println("Requested data", station)
+
 		result := db.DB.Create(&station)
 		if result.Error != nil {
 			fmt.Println("Data insertion issue")
@@ -51,6 +74,14 @@ func Stationcreation(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// Getallstations godoc
+// @Summary Get all stations
+// @Description Retrieve all grid stations
+// @Tags Stations
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.Gridstations
+// @Router /getallstations [get]
 func Getallstations(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Get all stations API is called ")
 

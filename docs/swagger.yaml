@@ -1,0 +1,95 @@
+basePath: /
+definitions:
+  models.Gridstations:
+    properties:
+      id:
+        type: integer
+      name:
+        example: Main Grid Station
+        type: string
+      status:
+        example: Active
+        type: string
+    type: object
+host: localhost:8082
+info:
+  contact: {}
+  description: API for Load Management System with Station Management and WebSocket
+  title: Load Management System API
+  version: "1.0"
+paths:
+  /deletestation:
+    delete:
+      consumes:
+      - application/json
+      description: Delete station by ID
+      parameters:
+      - description: Station ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid ID
+          schema:
+            type: string
+      summary: Delete a station
+      tags:
+      - Stations
+  /getallstations:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all grid stations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Gridstations'
+            type: array
+      summary: Get all stations
+      tags:
+      - Stations
+  /stationcreation:
+    post:
+      consumes:
+      - application/json
+      description: Create a new grid station entry
+      parameters:
+      - description: Station Data
+        in: body
+        name: station
+        required: true
+        schema:
+          $ref: '#/definitions/models.Gridstations'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new station
+      tags:
+      - Stations
+swagger: "2.0"
