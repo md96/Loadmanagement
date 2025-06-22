@@ -3,7 +3,10 @@ module github.com/md96/load-management
 
 go 1.24.1
 
-require gorm.io/gorm v1.30.0
+require (
+	github.com/gorilla/websocket v1.5.3
+	gorm.io/gorm v1.30.0
+)
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
